@@ -1,15 +1,6 @@
-const inputText = document.querySelector('#input-text'),
-      textBlock = document.querySelector('#text-block');
+const list = document.querySelector('#list');
 
-
-// inputText.addEventListener('input', () => {
-//     console.log(inputText.value);
-//     textBlock.innerText = inputText.value;
-// })
-
-inputText.addEventListener('input', inputHandler);
-
-function inputHandler () {
-    console.log(inputText.value);
-    textBlock.innerText = inputText.value;
-}
+list.addEventListener('click', function (event) {
+    console.log(this);
+    console.log(event.target);
+});
