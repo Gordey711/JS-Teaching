@@ -1,26 +1,44 @@
-// Выбор контейнера
-const container = document.querySelector('#elementsContainer');
- 
-// Выбор заголовка
-const newHeader = document.createElement('h1');
-newHeader.innerText = 'Новый заголовок';
+const todoList = document.querySelector('#todo-list'),
+      todoForm = document.querySelector('#todo-form'),
+      todoInput = document.querySelector('#todo-input');
 
-container.append(newHeader);
+todoForm.addEventListener('submit', formHandler);
 
-// Клонирование элементов 
+function formHandler(event) {
+    event.preventDefault();
 
-// const mainHeader = document.querySelector('header');
-// const headerCopy = mainHeader.cloneNode(true);
-// container.append(headerCopy);
+    // Получаем название задачи из поля ввода
+    const taskText = todoInput.value;
 
-// Вставка разметки через строки 
+    // // Создаём тег li через разметку
+    // const li = `<li>${taskText}</li>`;
 
-// const htmlExample = '<h2>Ещё один заголовок</h2>';
-// container.insertAdjacentHTML('beforeend', htmlExample);
+    // // Добавляем разметку на страницу 
+    // todoList.insertAdjacentHTML('beforeend', li);
 
+    /// Создаём тег li с помощью создания элемента
+    const newTask = document.createElement('li');
+    newTask.innerText = taskText;
 
-// Вставка разметки через шаблонные строки 
+    /// Создаём кнопку удалить
+    const deleteBtn = document.createElement('button');
+    deleteBtn.setAttribute('role', 'button');
+    deleteBtn.innerText = 'Удалить';
+    deleteBtn.style['margin-left'] = '15px';
+    newTask.append(deleteBtn);
 
-const title = 'Текст заголовка';
-const htmlExample = `<h2>${title}</h2>`;
-container.insertAdjacentHTML('beforeend', htmlExample);
+    // Добавляем событие по клику
+    deleteBtn.addEventListener('click', function () {
+        this.closest('li').remove();
+    });
+
+    /// Добавляем элемент на страницу
+    todoList.append(newTask);
+
+    // Очищаем поле ввода 
+    todoInput.value = '';
+
+    // Фокус на поле ввода
+    todoInput.focus();
+}
+
